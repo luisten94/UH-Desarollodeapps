@@ -51,3 +51,5 @@ def validate_user(usuario: str, password: str) -> bool:
     row = cur.fetchone()
     conn.close()
     return row is not None
+if __name__ == "__main__":
+    print("✅ Commit de prueba vinculado a Azure Boards AB#13")
