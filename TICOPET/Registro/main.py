@@ -4,4 +4,5 @@ if __name__ == "__main__":
     app = MainApp()
     app.mainloop()
 
-print("demo commit vinculado a Azure Boards AB#2")
+print("H1- Registro de propietario ")
+
