@@ -61,3 +61,7 @@ class LoginPage(ttk.Frame):
         root = self.winfo_toplevel()
         if hasattr(root, "navigate"):
             root.navigate("dashboard")
+
+if __name__ == "__main__":
+    print("Purba de login")
+
