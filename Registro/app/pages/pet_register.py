@@ -177,3 +177,7 @@ class PetRegisterPage(ttk.Frame):
         self.dueno_var.set("")
         self.contacto_var.set("")
         self.obs_txt.delete("1.0", "end")
+
+if __name__ == "__main__":
+    print(" Prueba de vínculo con Azure Boards AB#13 desde registro de mascota")
+
