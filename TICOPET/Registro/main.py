@@ -9,4 +9,5 @@ print("H1- Registro de propietario ")
 
 
 
-print("Commit AB#13")
+print("Commit de pagina principal AB#13")
+
