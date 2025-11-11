@@ -77,3 +77,8 @@ class PatientsPage(ttk.Frame):
             iid, values = s
             if messagebox.askyesno("Confirmar", f"¿Eliminar {values[0]}? (demo)"):
                 self.tree.delete(iid)
+
+
+if __name__ == "__main__":
+    print(" Registro propietarios")
+
