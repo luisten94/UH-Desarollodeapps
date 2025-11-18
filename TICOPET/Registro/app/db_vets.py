@@ -44,7 +44,7 @@ def create_vet(
     try:
         cur.execute("""
             INSERT INTO veterinarios
-            (nombre, colegiado, cedula, especialidad, telefono, correo, direccion, observaciones, registrado_por)
+            (nombre, colegiado, cedula, especialidades, telefono, correo, direccion, observaciones, registrado_por)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (nombre, colegiado, cedula, especialidad, telefono, correo, direccion, observaciones, registrado_por))
         conn.commit()
