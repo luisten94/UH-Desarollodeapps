@@ -8,6 +8,7 @@ from app.pages.simple import SimpleLabelPage
 from app.pages.users import UsersPage
 from app.pages.login import LoginPage
 from app.pages.pet_register import PetRegisterPage
+from app.pages.vet_register import VetRegisterPage
 
 APP_NAME = "TicoVet"
 
@@ -31,6 +32,7 @@ class Sidebar(ttk.Frame):
         self._btn("Dashboard", "dashboard")
         self._btn("Pacientes", "patients")
         self._btn("Registrar mascota", "pet_register")
+        self._btn("Registrar veterinario", "vet_register")
         self._btn("Dueños", "owners")
         self._btn("Citas", "appointments")
         self._btn("Vacunas", "vaccines")
@@ -132,6 +134,7 @@ class MainApp(tk.Tk):
             "users":        UsersPage(self.content),   # registro de usuario
             "login":        LoginPage(self.content),   # inicio de sesión
             "settings":     SimpleLabelPage(self.content, "Ajustes"),
+            "vet_register":  VetRegisterPage(self.content),
         }
 
         for page in self.pages.values():
@@ -174,6 +177,7 @@ class MainApp(tk.Tk):
             "dashboard": "Dashboard",
             "patients": "Pacientes",
             "pet_register": "Registro de mascota",
+            "vet_register": "Registro de veterinario",
             "owners": "Dueños",
             "appointments": "Citas",
             "vaccines": "Vacunas",
