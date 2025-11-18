@@ -1,6 +1,7 @@
 import sqlite3
 from pathlib import Path
 
+# Usamos el mismo archivo de BD que el resto de la app
 DB_PATH = Path(__file__).resolve().parents[1] / "ticopet.db"
 
 def get_connection():
@@ -38,13 +39,16 @@ def create_vet(
     observaciones: str | None,
     registrado_por: str | None
 ) -> bool:
+    """
+    Inserta un veterinario. Devuelve False si el N.º de colegiado ya existe.
+    """
     ensure_vets_table()
     conn = get_connection()
     cur = conn.cursor()
     try:
         cur.execute("""
             INSERT INTO veterinarios
-            (nombre, colegiado, cedula, especialidades, telefono, correo, direccion, observaciones, registrado_por)
+            (nombre, colegiado, cedula, especialidad, telefono, correo, direccion, observaciones, registrado_por)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (nombre, colegiado, cedula, especialidad, telefono, correo, direccion, observaciones, registrado_por))
         conn.commit()
@@ -54,3 +58,36 @@ def create_vet(
     finally:
         conn.close()
     return ok
+
+def vet_exists(colegiado: str) -> bool:
+    """
+    Devuelve True si ya existe un veterinario con ese N.º de colegiado.
+    """
+    ensure_vets_table()
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT 1 FROM veterinarios WHERE colegiado = ? LIMIT 1", (colegiado,))
+    row = cur.fetchone()
+    conn.close()
+    return row is not None
+
+def get_vet_by_colegiado(colegiado: str):
+    """
+    Devuelve una tupla con los datos del veterinario si existe, o None si no.
+    Orden de columnas:
+    (id, nombre, colegiado, cedula, especialidad, telefono, correo,
+     direccion, observaciones, registrado_por, creado_en)
+    """
+    ensure_vets_table()
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, nombre, colegiado, cedula, especialidad, telefono, correo,
+               direccion, observaciones, registrado_por, creado_en
+        FROM veterinarios
+        WHERE colegiado = ?
+        LIMIT 1
+    """, (colegiado,))
+    row = cur.fetchone()
+    conn.close()
+    return row
